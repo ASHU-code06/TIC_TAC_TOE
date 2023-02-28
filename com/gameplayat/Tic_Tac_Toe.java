@@ -22,23 +22,122 @@ public class Tic_Tac_Toe {
         }else if ( playerchoice == 'O'){
             computerchoice = 'X';
         }
-        Random toss = new Random();
-        int firstChanceToPlay = toss.nextInt(2)+1;
-        if (firstChanceToPlay == 1){
-            System.out.println("HEAD\nU WIN TOSS");
-            while (true){
+        int move = toss();
+        if (move == 1) {
+            System.out.println("head");
+            System.out.println("u win toss ");
+            boolean gameover = false;
+            while (!gameover){
+                gameover = isgameover(gameboard);
+                if (gameover){
+                    break;
+                }
                 playermove(gameboard,playerchoice);
+                gameover = isgameover(gameboard);
+                if (gameover){
+                    break;
+                }
                 computermove(gameboard,computerchoice);
             }
-        } else if (firstChanceToPlay == 2) {
-            System.out.println("TAILS\nCOMPUTER WINS  TOSS");
-            while (true){
+        } else if (move == 2) {
+            System.out.println("tails");
+            System.out.println("Computer wins toss ");
+            boolean gameover = false;
+            while (!gameover) {
+                gameover = isgameover(gameboard);
+                if (gameover) {
+                    break;
+                }
                 computermove(gameboard,computerchoice);
+                gameover = isgameover(gameboard);
+                if (gameover) {
+                    break;
+                }
                 playermove(gameboard,playerchoice);
             }
         }
-
-
+    }
+    public static int toss() {
+        Random turn = new Random();
+        int chance = 1;
+        chance = turn.nextInt(2) + 1;
+        System.out.println("random toss is " + chance);
+        return chance;
+    }
+    public static boolean isgameover(char[][] gameboard) {
+        //horizontal wins
+        if (gameboard[0][0] == 'X' && gameboard[0][2] == 'X' && gameboard[0][4] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[0][0] == 'O' && gameboard[0][2] == '0' && gameboard[0][4] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        if (gameboard[2][0] == 'X' && gameboard[2][2] == 'X' && gameboard[2][4] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[2][0] == 'O' && gameboard[2][2] == 'O' && gameboard[2][4] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        if (gameboard[4][0] == 'X' && gameboard[4][2] == 'X' && gameboard[4][4] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[4][0] == 'O' && gameboard[4][2] == 'O' && gameboard[4][4] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        //vertical wins
+        if (gameboard[0][0] == 'X' && gameboard[2][0] == 'X' && gameboard[4][0] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[0][0] == 'O' && gameboard[2][0] == 'O' && gameboard[4][0] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        if (gameboard[0][2] == 'X' && gameboard[2][2] == 'X' && gameboard[4][4] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[0][2] == 'O' && gameboard[2][4] == 'O' && gameboard[4][4] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        if (gameboard[0][4] == 'X' && gameboard[2][4] == 'X' && gameboard[4][4] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[0][4] == 'O' && gameboard[2][4] == 'O' && gameboard[4][4] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        //diagonal wins
+        if (gameboard[0][0] == 'X' && gameboard[2][2] == 'X' && gameboard[4][4] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[0][0] == 'O' && gameboard[2][2] == 'O' && gameboard[4][4] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        if (gameboard[0][4] == 'X' && gameboard[2][2] == 'X' && gameboard[4][0] == 'X') {
+            System.out.println("player1 wins");
+            return true;
+        }
+        if (gameboard[0][4] == 'O' && gameboard[2][2] == 'O' && gameboard[4][0] == 'O') {
+            System.out.println("computer wins");
+            return true;
+        }
+        if ((gameboard[0][0] != ' ') && (gameboard[0][2] != ' ') && (gameboard[0][4] != ' ') && (gameboard[2][0] != ' ') && (gameboard[2][2] != ' ') && (gameboard[2][4] != ' ')&&(
+                gameboard[4][0]!=' ')&&(gameboard[4][2]!=' ')&&(gameboard[4][4]!=' ')) {
+            System.out.println("game is a tie");
+            return true;
+        }
+        return false;
     }
     public static void playermove(char[][] gameboard, char playerchoice) {
         System.out.println("player1 chance");
@@ -56,6 +155,7 @@ public class Tic_Tac_Toe {
     }
 
     public static void computermove(char[][] gameboard, char computerchoice) {
+        System.out.println("Computer chance ");
         Random run = new Random();
         int computerpos = run.nextInt(9)+1;
         boolean r = isvalidmove(gameboard, computerpos);
