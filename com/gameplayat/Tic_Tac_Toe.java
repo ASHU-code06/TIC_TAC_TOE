@@ -22,11 +22,23 @@ public class Tic_Tac_Toe {
         }else if ( playerchoice == 'O'){
             computerchoice = 'X';
         }
-
-        while (true){
-            playermove(gameboard,playerchoice);
-            computermove(gameboard,computerchoice);
+        Random toss = new Random();
+        int firstChanceToPlay = toss.nextInt(2)+1;
+        if (firstChanceToPlay == 1){
+            System.out.println("HEAD\nU WIN TOSS");
+            while (true){
+                playermove(gameboard,playerchoice);
+                computermove(gameboard,computerchoice);
+            }
+        } else if (firstChanceToPlay == 2) {
+            System.out.println("TAILS\nCOMPUTER WINS  TOSS");
+            while (true){
+                computermove(gameboard,computerchoice);
+                playermove(gameboard,playerchoice);
+            }
         }
+
+
     }
     public static void playermove(char[][] gameboard, char playerchoice) {
         System.out.println("player1 chance");
