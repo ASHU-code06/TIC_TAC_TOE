@@ -1,5 +1,7 @@
 package com.gameplayat;
 
+import java.util.Scanner;
+
 public class Tic_Tac_Toe {
     /*Create a board of char[] of size 10
     and assign empty space to each
@@ -13,6 +15,7 @@ public class Tic_Tac_Toe {
                 {'_', '+', '_', '+', '_'},
                 {' ', '|', ' ', '|', ' '}};
         printgameboard(gameboard);
+        selectletter();
     }
 
 
@@ -23,6 +26,17 @@ public class Tic_Tac_Toe {
                 System.out.print("  " + c);
             }
             System.out.println("  ");
+        }
+    }
+    public static void selectletter(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Select any letter of your choice either X or O : ");
+        String myletter = input.nextLine();
+        System.out.println("selected letter is :  "+myletter);
+        if(myletter.toLowerCase().equals("x")){
+            System.out.println("and Computer will choose O");
+        } else if (myletter.toLowerCase().equals("o")) {
+            System.out.println("and Computer will choose X");
         }
     }
 
